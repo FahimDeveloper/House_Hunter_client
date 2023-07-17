@@ -13,6 +13,7 @@ import AddNewHouse from "../Dashboard/houseOwner/pages/AddNewHouse/AddNewHouse";
 import OwnHouses from "../Dashboard/houseOwner/pages/OwnHouses/OwnHouses";
 import ManageHousesBookings from "../Dashboard/houseOwner/pages/ManageHousesBookings/ManageHousesBookings";
 import BookedHouse from "../Dashboard/houseRenter/Pages/BookedHouse/BookedHouse";
+import AuthProtectRouter from "./AuthProtectRouter";
 
 export const router = createBrowserRouter([
     {
@@ -20,8 +21,8 @@ export const router = createBrowserRouter([
             { path: "/", element: <Home /> },
             { path: "/housePage/:id", element: <HousePage /> },
             { path: "/searchHouse/search/:searchText", element: <SearchHouses /> },
-            { path: "/login", element: <Login /> },
-            { path: "/register", element: <Register /> },
+            { path: "/login", element: <AuthProtectRouter><Login /></AuthProtectRouter> },
+            { path: "/register", element: <AuthProtectRouter><Register /></AuthProtectRouter> },
         ]
     },
     {
