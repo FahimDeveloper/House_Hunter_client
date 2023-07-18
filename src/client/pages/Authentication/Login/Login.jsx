@@ -4,6 +4,7 @@ import Lottie from "lottie-react";
 import animation from "../../../../assets/AuthAnimation.json"
 import axios from "axios";
 import useAuth from "../../../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
@@ -14,6 +15,12 @@ const Login = () => {
             if (data.data.user) {
                 localStorage.setItem("userId", data.data.user._id);
                 setCheckUser(!checkUser)
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${data.data}`,
+                })
             }
         })
     }

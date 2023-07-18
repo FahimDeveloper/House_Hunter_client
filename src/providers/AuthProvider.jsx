@@ -14,7 +14,8 @@ const AuthProvider = ({ children }) => {
             axios.post("http://localhost:5000/logOutUser", { email }).then(data => {
                 if (data.data.modifiedCount > 0) {
                     setUser(null)
-                    localStorage.removeItem("userId")
+                    localStorage.removeItem("userId");
+                    localStorage.removeItem('access-token');
                 }
             })
         }
@@ -30,8 +31,11 @@ const AuthProvider = ({ children }) => {
         if (localStorage.getItem("userId")) {
             axios.get(`http://localhost:5000/userAvailable/${localStorage.getItem("userId")}`).then(data => {
                 if (data.data.loggedIn) {
-                    setUser(data.data)
-                    setLoading(false)
+                    setUser(data.data);
+                    axios.post("http://localhost:5000/jwt", data.data.email).then(data => {
+                        localStorage.setItem('access-token', data.data);
+                        setLoading(false);
+                    })
                 }
             })
         } else {

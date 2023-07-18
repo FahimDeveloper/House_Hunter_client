@@ -14,12 +14,13 @@ import OwnHouses from "../Dashboard/houseOwner/pages/OwnHouses/OwnHouses";
 import ManageHousesBookings from "../Dashboard/houseOwner/pages/ManageHousesBookings/ManageHousesBookings";
 import BookedHouse from "../Dashboard/houseRenter/Pages/BookedHouse/BookedHouse";
 import AuthProtectRouter from "./AuthProtectRouter";
+import AllProtectRouter from "./AllProtectRouter";
 
 export const router = createBrowserRouter([
     {
         path: "/", element: <MainLayout />, children: [
             { path: "/", element: <Home /> },
-            { path: "/housePage/:id", element: <HousePage /> },
+            { path: "/housePage/:id", element: <AllProtectRouter><HousePage /></AllProtectRouter> },
             { path: "/searchHouse/search/:searchText", element: <SearchHouses /> },
             { path: "/login", element: <AuthProtectRouter><Login /></AuthProtectRouter> },
             { path: "/register", element: <AuthProtectRouter><Register /></AuthProtectRouter> },

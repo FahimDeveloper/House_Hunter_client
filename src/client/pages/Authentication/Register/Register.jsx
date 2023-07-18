@@ -4,6 +4,7 @@ import Lottie from "lottie-react";
 import animation from "../../../../assets/AuthAnimation.json"
 import axios from "axios";
 import useAuth from "../../../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Register = () => {
     const { register, handleSubmit } = useForm();
@@ -14,6 +15,12 @@ const Register = () => {
             if (data.data.insertedId) {
                 localStorage.setItem("userId", data.data.insertedId);
                 setCheckUser(!checkUser)
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${data.data}`,
+                })
             }
         })
     }
