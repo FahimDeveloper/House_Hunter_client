@@ -7,7 +7,7 @@ import { useQuery } from "react-query";
 import { BsFillHouseAddFill } from "react-icons/bs";
 
 const UpdateHouseData = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [axiosSecure] = useAxiosSecure();
     const navigate = useNavigate();
     const { user } = useAuth();
@@ -31,7 +31,7 @@ const UpdateHouseData = () => {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Update house data successfully',
+                    title: 'update successfully',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -127,7 +127,8 @@ const UpdateHouseData = () => {
                             <label className="label">
                                 <span className="label-text">Phone</span>
                             </label>
-                            <input type="tel"{...register("phone_number")} value={user?.phone} className="input input-bordered w-full" />
+                            <input type="tel"{...register("phone_number", { pattern: /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/ })} defaultValue={houseData.phone_number} className="input input-bordered w-full" />
+                            {errors.phone_number && <span className="text-red-600">It is not bd number, Please check the number and re write it</span>}
                         </div>
                     </div>
                     <div className="form-control w-full">

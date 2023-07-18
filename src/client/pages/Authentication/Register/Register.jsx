@@ -7,7 +7,7 @@ import useAuth from "../../../../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const Register = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
     const { setCheckUser, checkUser } = useAuth();
     const onSubmit = (data) => {
         data.loggedIn = true;
@@ -41,13 +41,6 @@ const Register = () => {
                                 <span className="label-text">Email</span>
                             </label>
                             <input type="email" {...register('email')} placeholder="Enter your email" className="input input-bordered w-full" required />
-                        </div>
-                        <div className="form-control w-full">
-                            <label className="label">
-                                <span className="label-text">Phone</span>
-                            </label>
-                            <input type="tel" {...register('phone', { pattern: /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/ })} placeholder="Enter your phone number" className="input input-bordered w-full" required />
-                            {errors.phone && <span className="text-red-600">This is not bd number, Please check the number and re write it</span>}
                         </div>
                         <div className="form-control w-full">
                             <label className="label">

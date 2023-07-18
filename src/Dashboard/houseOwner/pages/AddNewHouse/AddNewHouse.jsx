@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const AddNewHouse = () => {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [axiosSecure] = useAxiosSecure();
     const navigate = useNavigate();
     const { user } = useAuth();
@@ -34,7 +34,7 @@ const AddNewHouse = () => {
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
-                            title: 'New house add successfully',
+                            title: 'Add house successfully',
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -130,7 +130,8 @@ const AddNewHouse = () => {
                             <label className="label">
                                 <span className="label-text">Phone</span>
                             </label>
-                            <input type="tel"{...register("phone_number")} value={user?.phone} className="input input-bordered w-full" />
+                            <input type="tel"{...register("phone_number", { pattern: /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/ })} className="input input-bordered w-full" />
+                            {errors.phone && <span className="text-red-600">It is not bd number, Please check the number and re write it</span>}
                         </div>
                     </div>
                     <div className="form-control w-full">
