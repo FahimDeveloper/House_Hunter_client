@@ -1,7 +1,6 @@
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import HouseCard from "../../../components/shared/HouseCard/HouseCard";
 
 
 const HousePage = () => {

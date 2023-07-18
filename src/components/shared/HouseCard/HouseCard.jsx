@@ -13,7 +13,7 @@ const HouseCard = ({ house }) => {
                     </h2>
                     <div className="card-actions justify-between text-base">
                         <p>{house.rent_per_month} Tk / per month</p>
-                        <p className='flex items-center font-semibold gap-2'><AiFillStar className='text-warning text-3xl' /> {house.rating}</p>
+                        <p className='flex items-center font-semibold gap-2 justify-end'><AiFillStar className='text-warning text-3xl' /> {house.rating}</p>
                     </div>
                     <p className='flex items-center text-base gap-3'><FaMapLocationDot className='text-2xl text-secondary' />{house.address}, {house.city}</p>
                 </div>

@@ -1,16 +1,26 @@
 import axios from "axios";
-import { useQuery } from "react-query";
 import HouseCard from "../../../components/shared/HouseCard/HouseCard";
+import { useEffect, useState } from "react";
 
 
 const Home = () => {
-    const { data: houseCollection = [] } = useQuery({
-        queryKey: ["houseCollection"],
-        queryFn: async () => {
-            const res = await axios.get("http://localhost:5000/houseCollection");
-            return res.data
-        }
-    })
+    const [houseCollection, setHouseCollection] = useState([]);
+    const [totalHouse, setTotalHouse] = useState(0);
+    useEffect(() => {
+        axios.get("http://localhost:5000/totalHouse").then(res => {
+            setTotalHouse(res.data.totalHouse)
+        })
+    }, [])
+    const [currentPage, setCurrentPage] = useState(0);
+    const housePerPage = 10;
+    const totalPage = Math.ceil(totalHouse / housePerPage);
+    const pageNumbers = [...Array(totalPage).keys()];
+    const url = `http://localhost:5000/houseCollection?page=${currentPage}&limit=${housePerPage}`
+    useEffect(() => {
+        axios.get(url).then(res => {
+            setHouseCollection(res.data)
+        })
+    }, [url])
     return (
         <div className="py-10 space-y-10">
             <div className="form-control">
@@ -24,6 +34,16 @@ const Home = () => {
             <div className="grid grid-cols-4 gap-5">
                 {
                     houseCollection.map(house => <HouseCard key={house._id} house={house} />)
+                }
+            </div>
+            <div className='text-center space-x-3'>
+                {
+                    totalHouse > 20 ? pageNumbers.map(number => <button
+                        onClick={() => setCurrentPage(number)}
+                        className={`${(currentPage === number) ? "border-2 text-xl bg-secondary" : ''} px-2 rounded text-lg border border-secondary`}
+                        key={number}>
+                        {number + 1}
+                    </button>) : ''
                 }
             </div>
         </div>
