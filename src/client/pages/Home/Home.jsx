@@ -40,7 +40,7 @@ const Home = () => {
                 {
                     totalHouse > 20 ? pageNumbers.map(number => <button
                         onClick={() => setCurrentPage(number)}
-                        className={`${(currentPage === number) ? "border-2 text-xl bg-secondary" : ''} px-2 rounded text-lg border border-secondary`}
+                        className={`${(currentPage === number) ? "border-2 text-xl bg-primary" : ''} px-2 rounded text-lg border border-primary`}
                         key={number}>
                         {number + 1}
                     </button>) : ''

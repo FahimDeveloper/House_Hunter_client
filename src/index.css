@@ -5,3 +5,11 @@
 body {
     font-family: 'Open Sans', sans-serif;
 }
+
+.perfect-screen {
+    @apply min-h-[calc(100vh-100px)]
+}
+
+.detailStyle {
+    @apply flex items-center text-base gap-3
+}

@@ -25,7 +25,7 @@ const Login = () => {
         })
     }
     return (
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="perfect-screen flex items-center justify-center">
             <div className="bg-white shadow-xl border w-full grid grid-cols-2 items-center gap-10 p-20 rounded-xl">
                 <Lottie animationData={animation} loop={true} />
                 <div className="space-y-5">
