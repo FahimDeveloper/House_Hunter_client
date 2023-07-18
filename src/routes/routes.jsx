@@ -28,11 +28,11 @@ export const router = createBrowserRouter([
     },
     {
         path: "/dashboard", element: <DashboardLayout />, children: [
-            { path: "/dashboard", element: <Dashboard /> },
-            { path: "/dashboard/addNewHouse", element: <AddNewHouse /> },
-            { path: "/dashboard/ownHouses", element: <OwnHouses /> },
-            { path: "/dashboard/manageHousesBookings", element: <ManageHousesBookings /> },
-            { path: "/dashboard/myBookedHouses", element: <BookedHouse /> },
+            { path: "/dashboard", element: <AllProtectRouter><Dashboard /></AllProtectRouter> },
+            { path: "/dashboard/addNewHouse", element: <AllProtectRouter><AddNewHouse /></AllProtectRouter> },
+            { path: "/dashboard/manageOwnHouses", element: <AllProtectRouter><OwnHouses /></AllProtectRouter> },
+            { path: "/dashboard/manageHouseBookings", element: <AllProtectRouter><ManageHousesBookings /></AllProtectRouter> },
+            { path: "/dashboard/myBookedHouses", element: <AllProtectRouter><BookedHouse /></AllProtectRouter> },
         ]
     }
 ])

@@ -23,13 +23,14 @@ const HousePage = () => {
     })
     return (
         <div className="perfect-screen flex items-center justify-center">
-            <div className="card grid grid-cols-5 bg-base-100 shadow-xl">
-                <figure className="col-span-3"><img src={houseData.picture} className="h-full" alt="House picture" /></figure>
+            <div className="card max-h-[700px] overflow-hidden grid grid-cols-5 bg-base-100 shadow-xl">
+                <figure className="col-span-3"><img src={houseData.picture} className="h-full w-full object-cover" alt="House picture" /></figure>
                 <div className="card-body col-span-2 space-y-5">
                     <h2 className="card-title text-3xl">{houseData.name}</h2>
                     <div className="space-y-2">
                         <h3 className="text-xl capitalize font-medium mb-3">house information :</h3>
                         <p className='detailStyle'>Location : <FaMapLocationDot className='text-2xl' />{houseData.address}, {houseData.city}</p>
+                        <p className="detailStyle">Room size : {houseData.room_size} sqr fit</p>
                         <p className="detailStyle">Bedrooms : {houseData.bedrooms} <IoIosBed className="text-2xl" /></p>
                         <p className="detailStyle">Bathrooms : {houseData.bathrooms} <FaBath className="text-2xl" /></p>
                         <p className="detailStyle">Kitchen : {houseData.kitchen} <TbToolsKitchen2 className="text-2xl" /></p>

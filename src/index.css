@@ -13,3 +13,7 @@ body {
 .detailStyle {
     @apply flex items-center text-base gap-3
 }
+
+.dashboardNavStyle {
+    @apply text-base py-2 px-3 rounded-md bg-white border flex items-center gap-2
+}
