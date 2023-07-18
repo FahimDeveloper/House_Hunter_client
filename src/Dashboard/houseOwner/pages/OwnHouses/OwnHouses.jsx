@@ -43,7 +43,7 @@ const OwnHouses = () => {
                                         <td>{house.rent_per_month}</td>
                                         <td><Link to={`/housePage/${house._id}`} className="btn btn-secondary btn-outline btn-sm">view details</Link></td>
                                         <td className="space-x-2">
-                                            <button className="btn btn-sm btn-primary btn-outline">update</button>
+                                            <Link to={`/dashboard/updateHouseData/${house._id}`}><button className="btn btn-sm btn-primary btn-outline">update</button></Link>
                                             <button className="btn btn-sm btn-accent btn-outline">delete</button>
                                         </td>
                                     </tr>

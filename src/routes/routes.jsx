@@ -15,6 +15,7 @@ import ManageHousesBookings from "../Dashboard/houseOwner/pages/ManageHousesBook
 import BookedHouse from "../Dashboard/houseRenter/Pages/BookedHouse/BookedHouse";
 import AuthProtectRouter from "./AuthProtectRouter";
 import AllProtectRouter from "./AllProtectRouter";
+import UpdateHouseData from "../Dashboard/houseOwner/pages/UpdateHouseData/UpdateHouseData";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
         path: "/dashboard", element: <DashboardLayout />, children: [
             { path: "/dashboard", element: <AllProtectRouter><Dashboard /></AllProtectRouter> },
             { path: "/dashboard/addNewHouse", element: <AllProtectRouter><AddNewHouse /></AllProtectRouter> },
+            { path: "/dashboard/updateHouseData/:id", element: <AllProtectRouter><UpdateHouseData /></AllProtectRouter> },
             { path: "/dashboard/manageOwnHouses", element: <AllProtectRouter><OwnHouses /></AllProtectRouter> },
             { path: "/dashboard/manageHouseBookings", element: <AllProtectRouter><ManageHousesBookings /></AllProtectRouter> },
             { path: "/dashboard/myBookedHouses", element: <AllProtectRouter><BookedHouse /></AllProtectRouter> },
