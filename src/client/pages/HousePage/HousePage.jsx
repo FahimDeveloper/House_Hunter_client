@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaMapLocationDot, FaBath } from "react-icons/fa6";
 import { IoIosBed } from "react-icons/io";
@@ -17,6 +17,7 @@ import { Dialog, Transition } from '@headlessui/react'
 const HousePage = () => {
     const { user } = useAuth();
     const { id } = useParams();
+    const navigate = useNavigate();
     const [axiosSecure] = useAxiosSecure();
     const { data: houseData = {} } = useQuery({
         queryKey: ["houseDetails", id],
@@ -36,7 +37,12 @@ const HousePage = () => {
     }
     const onSubmit = data => {
         data.houseOwner = houseData.houseOwner;
+        data.picture = houseData.picture
         data.houseId = houseData._id;
+        data.houseName = houseData.name;
+        data.city = houseData.city;
+        data.rent = houseData.rent_per_month;
+        data.availability_date = houseData.availability_date;
         axiosSecure.post("/bookingHouse", data).then(res => {
             if (res.data.insertedId) {
                 Swal.fire({
@@ -47,6 +53,7 @@ const HousePage = () => {
                     timer: 1500
                 });
                 closeModal()
+                navigate('/dashboard/myBookedHouses')
             }
         })
     }
@@ -147,7 +154,7 @@ const HousePage = () => {
                                                 <label className="label">
                                                     <span className="label-text">Phone</span>
                                                 </label>
-                                                <input type="number"{...register("renter_phone_number")} placeholder="Type here" className="input input-bordered w-full" />
+                                                <input type="number"{...register("renter_phone_number")} required placeholder="Type here" className="input input-bordered w-full" />
                                             </div>
                                             <div className="mt-3 text-end">
                                                 <button className="btn btn-primary px-10">Book</button>

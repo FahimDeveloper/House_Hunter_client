@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
         path: "/", element: <MainLayout />, children: [
             { path: "/", element: <Home /> },
             { path: "/housePage/:id", element: <AllProtectRouter><HousePage /></AllProtectRouter> },
-            { path: "/searchHouse/search/:searchText", element: <SearchHouses /> },
+            { path: "/searchHouse/search", element: <SearchHouses /> },
             { path: "/login", element: <AuthProtectRouter><Login /></AuthProtectRouter> },
             { path: "/register", element: <AuthProtectRouter><Register /></AuthProtectRouter> },
         ]
