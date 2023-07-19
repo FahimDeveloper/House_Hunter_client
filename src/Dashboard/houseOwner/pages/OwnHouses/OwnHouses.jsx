@@ -4,6 +4,7 @@ import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import { BsFillHouseAddFill } from 'react-icons/bs';
+import moment from "moment";
 
 const OwnHouses = () => {
     const { user } = useAuth();
@@ -51,7 +52,7 @@ const OwnHouses = () => {
                                                 <th>{index + 1}</th>
                                                 <td>{house.name}</td>
                                                 <td>{house.city}</td>
-                                                <td>{house.availability_date}</td>
+                                                <td>{moment(house.availability_date).format("dddd, MMMM Do YYYY,")}</td>
                                                 <td>{house.rent_per_month}</td>
                                                 <td><Link to={`/housePage/${house._id}`} className="btn btn-secondary btn-outline btn-sm">view details</Link></td>
                                                 <td className="space-x-2">

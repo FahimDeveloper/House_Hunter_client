@@ -51,6 +51,12 @@ const Home = () => {
                     timer: 1500
                 });
                 closeModal()
+            } else {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Sorry',
+                    text: `${res.data}`,
+                })
             }
         })
     }
