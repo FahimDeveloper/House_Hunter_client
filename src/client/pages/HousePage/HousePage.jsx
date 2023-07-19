@@ -8,6 +8,10 @@ import { BsFillStarFill, BsStar } from "react-icons/bs";
 import Rating from "react-rating";
 import moment from "moment/moment";
 import useAuth from "../../../hooks/useAuth";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { useState, Fragment } from "react";
+import { Dialog, Transition } from '@headlessui/react'
 
 
 const HousePage = () => {
@@ -20,7 +24,32 @@ const HousePage = () => {
             const res = await axiosSecure.get(`/singleHouseData/${id}`);
             return res.data
         }
-    })
+    });
+    const { register, handleSubmit, reset } = useForm();
+    const [isOpen, setIsOpen] = useState(false)
+    const closeModal = () => {
+        setIsOpen(false)
+    }
+    const openModal = () => {
+        reset()
+        setIsOpen(true)
+    }
+    const onSubmit = data => {
+        data.houseOwner = houseData.houseOwner;
+        data.houseId = houseData._id;
+        axiosSecure.post("/bookingHouse", data).then(res => {
+            if (res.data.insertedId) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Your house booked successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                closeModal()
+            }
+        })
+    }
     return (
         <div className="perfect-screen flex items-center justify-center">
             <div className="card max-h-[700px] overflow-hidden grid grid-cols-5 bg-base-100 shadow-xl">
@@ -58,11 +87,79 @@ const HousePage = () => {
                                     <button disabled={user.userRole === "house owner" ? true : false} className="btn btn-primary">Booking now</button>
                                 </>
                                 :
-                                <button className="btn btn-primary">Booking now</button>
+                                <button onClick={openModal} className="btn btn-primary">Booking now</button>
                         }
                     </div>
                 </div>
             </div>
+            <>
+                <Transition appear show={isOpen} as={Fragment}>
+                    <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                        >
+                            <div className="fixed inset-0 bg-black bg-opacity-25" />
+                        </Transition.Child>
+
+                        <div className="fixed inset-0 overflow-y-auto">
+                            <div className="flex min-h-full items-center justify-center p-4 text-center">
+                                <Transition.Child
+                                    as={Fragment}
+                                    enter="ease-out duration-300"
+                                    enterFrom="opacity-0 scale-95"
+                                    enterTo="opacity-100 scale-100"
+                                    leave="ease-in duration-200"
+                                    leaveFrom="opacity-100 scale-100"
+                                    leaveTo="opacity-0 scale-95"
+                                >
+                                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl space-y-4 bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                        <Dialog.Title
+                                            as="h3"
+                                            className="text-lg font-medium leading-6 text-gray-900"
+                                        >
+                                            Booking a house
+                                        </Dialog.Title>
+                                        <div className="space-y-2">
+                                            <p>House name : <span className="font-medium">{houseData.name}</span></p>
+                                            <p>Rent per month : {houseData.rent_per_month} Tk</p>
+                                            <p>city : {houseData.city}</p>
+                                        </div>
+                                        <form onSubmit={handleSubmit(onSubmit)}>
+                                            <div className="form-control w-full">
+                                                <label className="label">
+                                                    <span className="label-text">Name</span>
+                                                </label>
+                                                <input type="name" {...register("renter_name")} defaultValue={user?.name} readOnly className="input input-bordered w-full" />
+                                            </div>
+                                            <div className="form-control w-full">
+                                                <label className="label">
+                                                    <span className="label-text">Email</span>
+                                                </label>
+                                                <input type="email"{...register("renter_email")} defaultValue={user?.email} readOnly className="input input-bordered w-full" />
+                                            </div>
+                                            <div className="form-control w-full">
+                                                <label className="label">
+                                                    <span className="label-text">Phone</span>
+                                                </label>
+                                                <input type="number"{...register("renter_phone_number")} placeholder="Type here" className="input input-bordered w-full" />
+                                            </div>
+                                            <div className="mt-3 text-end">
+                                                <button className="btn btn-primary px-10">Book</button>
+                                            </div>
+                                        </form>
+                                    </Dialog.Panel>
+                                </Transition.Child>
+                            </div>
+                        </div>
+                    </Dialog>
+                </Transition>
+            </>
         </div>
     );
 };

@@ -56,11 +56,11 @@ const AddNewHouse = () => {
                             <label className="label">
                                 <span className="label-text">Appertment or house name</span>
                             </label>
-                            <input type="text" {...register("name")} required placeholder="Type here" className="input input-bordered w-full" />
+                            <input type="text" {...register('name')} placeholder="Enter your name" className="input input-bordered w-full" required />
                         </div>
                         <div className="form-control w-full">
                             <label className="label">
-                                <span className="label-text">Appertment or house name</span>
+                                <span className="label-text">Street or road address</span>
                             </label>
                             <input type="text" {...register("address")} required placeholder="street, road address..." className="input input-bordered w-full" />
                         </div>
@@ -124,14 +124,14 @@ const AddNewHouse = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email"{...register("houseOwner")} value={user?.email} placeholder="Type here" className="input input-bordered w-full" />
+                            <input type="email"{...register("houseOwner")} defaultValue={user?.email} readOnly placeholder="Type here" className="input input-bordered w-full" />
                         </div>
                         <div className="form-control w-full">
                             <label className="label">
                                 <span className="label-text">Phone</span>
                             </label>
-                            <input type="tel"{...register("phone_number", { pattern: /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/ })} className="input input-bordered w-full" />
-                            {errors.phone && <span className="text-red-600">It is not bd number, Please check the number and re write it</span>}
+                            <input type="tel"{...register("phone_number", { pattern: /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/ })} placeholder="Type here" className="input input-bordered w-full" />
+                            {errors.phone_number && <span className="text-red-600">It is not bd number, Please check the number and re write it</span>}
                         </div>
                     </div>
                     <div className="form-control w-full">

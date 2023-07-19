@@ -44,6 +44,12 @@ const Register = () => {
                         </div>
                         <div className="form-control w-full">
                             <label className="label">
+                                <span className="label-text">Phone</span>
+                            </label>
+                            <input type="number" {...register("phone")} placeholder="Enter your phone number" className="input input-bordered w-full" />
+                        </div>
+                        <div className="form-control w-full">
+                            <label className="label">
                                 <span className="label-text">Chooce your role</span>
                             </label>
                             <select {...register("userRole")} className="select select-bordered w-full" required>
